@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Neural Sequence labeling model implemented using PyTorch
 ======
 State-of-the-art sequence labeling models mostly utilize the CRF structure with input word features. LSTM (or bidirectional LSTM) is a popular deep learning based feature extractor in sequence labeling task. Besides, features within word are also useful to represent word, which can be captured by character LSTM or character CNN structure.
@@ -42,3 +43,6 @@ Updating...
 * 2018-Jan-02, support character feature selection. 
 * 2017-Dec-06, init version
 
+=======
+# CatNER
+>>>>>>> 78d1ce15110dbeb1dd131a210791d1fa851c785d
