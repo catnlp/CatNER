@@ -283,7 +283,7 @@ def train(data, save_model_dir, seg=True):
                 sys.stdout.flush()
                 losses.append(sample_loss / 50.0)
                 vis.line(np.array(losses), X=np.array([i for i in range(len(losses))]),
-                         win='cove_loss', opts={'title': 'loss', 'legend': ['loss']})
+                         win='cove_loss', opts={'title': 'cove_loss', 'legend': ['loss']})
                 sample_loss = 0
             loss.backward()
             optimizer.step()
