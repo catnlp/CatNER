@@ -410,12 +410,12 @@ if __name__ == '__main__':
 
     save_model_dir = args.savemodel
     gpu = torch.cuda.is_available()
-    gpu = False  ## catner
+    # gpu = False  ## catner
     # gpu = False
     ## disable cudnn to avoid memory leak
     # torch.backends.cudnn.enabled = True
     print "Seed num:", seed_num
-    # print "CuDNN:", torch.backends.cudnn.enabled ## catner
+    print "CuDNN:", torch.backends.cudnn.enabled ## catner
     # gpu = False
     print "GPU available:", gpu
     print "Status:", status

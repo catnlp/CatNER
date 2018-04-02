@@ -110,7 +110,6 @@ class CoveBiLSTM(nn.Module):
         # outputs = outputs[0]
         outputs.contiguous()
         outputs = outputs.view(batch_size, sent_len, -1)
-
         word_embs = torch.cat([word_embs, outputs], 2)
 
 
@@ -136,7 +135,7 @@ class CoveBiLSTM(nn.Module):
         hidden = None
         lstm_out, hidden = self.lstm(packed_words, hidden)
         lstm_out, _ = pad_packed_sequence(lstm_out)
-        ## lstm_out (seq_len, seq_len, hidden_size)
+        ## lstm_out (seq_len, batch_size, hidden_size)
         lstm_out = self.droplstm(lstm_out.transpose(1, 0))
         ## lstm_out (batch_size, seq_len, hidden_size)
         return lstm_out
