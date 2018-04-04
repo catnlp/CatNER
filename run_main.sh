@@ -4,7 +4,9 @@ python main.py --status train \
 		--train ../data/conll2003/train.bmes \
 		--dev ../data/conll2003/dev.bmes \
 		--test ../data/conll2003/test.bmes \
-		--savemodel ../data/conll2003/saved_model \
+		--savemodel ../data/conll2003/saved_model_charlstm_50_lstm_100_crf \
+		--savedset ../data/conll2003/saved_model_charlstm_50_lstm_100_crf \
+		--gpu False
 
 
 # python main.py --status decode \

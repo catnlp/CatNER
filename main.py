@@ -323,9 +323,9 @@ def train(data, save_model_dir, seg=True):
             print("Test: time: %.2fs, speed: %.2fst/s; acc: %.4f"%(test_cost, speed, acc))
         if current_score > best_test:
             if seg:
-                print "Exceed previous best f score:", best_test
+                print("Exceed previous best f score:", best_test)
             else:
-                print "Exceed previous best acc score:", best_test
+                print ("Exceed previous best acc score:", best_test)
             model_name = save_model_dir +'/model'+ str(idx)
             torch.save(model.state_dict(), model_name)
             best_test = current_score
@@ -334,6 +334,11 @@ def train(data, save_model_dir, seg=True):
                     f.write("acc: %.4f, p: %.4f, r: %.4f, f: %.4f" % (acc, p, r, f_test))
                 else:
                     f.write("acc: %.4f" % acc)
+
+        if seg:
+            print("Current best f score:", best_test)
+        else:
+            print("Current best acc score:", best_test)
 
         all_F.append([f_train*100.0, f_dev*100.0, f_test*100.0])
         Fwin = 'F-score of {train, dev, test}'
@@ -379,6 +384,7 @@ if __name__ == '__main__':
     parser.add_argument('--train', default="../data/conll2003/train.bmes")
     parser.add_argument('--dev', default="../data/conll2003/dev.bmes" )
     parser.add_argument('--test', default="../data/conll2003/test.bmes")
+    parser.add_argument('--gpu', default='True')
     parser.add_argument('--seg', default="True") 
     parser.add_argument('--extendalphabet', default="True") 
     parser.add_argument('--raw') 
@@ -400,13 +406,16 @@ if __name__ == '__main__':
     status = args.status.lower()
 
     save_model_dir = args.savemodel
-    gpu = torch.cuda.is_available()
+    if args.gpu == "False":
+        gpu = False
+    else:
+        gpu = torch.cuda.is_available()
     # gpu = False  ## catner
     # gpu = False
     ## disable cudnn to avoid memory leak
     # torch.backends.cudnn.enabled = True
     print "Seed num:",seed_num
-    print "CuDNN:", torch.backends.cudnn.enabled
+    # print "CuDNN:", torch.backends.cudnn.enabled
     # gpu = False
     print "GPU available:", gpu
     print "Status:", status

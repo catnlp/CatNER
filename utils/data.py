@@ -30,7 +30,7 @@ class Data:
         # self.char_alphabet.add(PADDING)
         self.label_alphabet = Alphabet('label',True)
         self.tagScheme = "NoSeg"
-        self.char_features = "CNN" ## "LSTM"/"CNN"
+        self.char_features = "LSTM" ## "LSTM"/"CNN"
 
         self.train_texts = []
         self.dev_texts = []
