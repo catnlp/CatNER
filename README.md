@@ -44,9 +44,12 @@ pretrain word:400000, prefect match:11415, case_match:11656, oov:2233, oov%:0.08
 best F1: 0.913147
 ```
 
+#### 3.2 训练100个epoch:
+
 | 模型 | 超参数 | F1 |
 | :-------------: |:-------------:| :-----:|
 | charlstm+lstm+crf | 50_200 | 0.913147 |
+| average_batch_loss | 50_200 | 0.897811 |
 
 
 

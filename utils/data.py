@@ -30,7 +30,7 @@ class Data:
         # self.char_alphabet.add(PADDING)
         self.label_alphabet = Alphabet('label',True)
         self.tagScheme = "NoSeg"
-        self.char_features = "LSTM" ## "LSTM"/"CNN"
+        self.char_features = "CNN" ## "LSTM"/"CNN"
 
         self.train_texts = []
         self.dev_texts = []
@@ -53,7 +53,7 @@ class Data:
         ### hyperparameters
         self.HP_iteration = 100
         self.HP_batch_size = 10
-        self.HP_average_batch_loss = False
+        self.HP_average_batch_loss = False ## catner
         self.HP_char_hidden_dim = 50
         self.HP_hidden_dim = 200
         self.HP_dropout = 0.5
