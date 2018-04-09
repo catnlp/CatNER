@@ -281,6 +281,8 @@ def train(data, save_model_dir, seg=True):
                          win='loss', opts={'title': 'loss', 'legend': ['loss']})
                 sample_loss = 0
             loss.backward()
+            if data.HP_clip:
+                torch.nn.utils.clip_grad_norm(model.parameters(), 50.0)
             optimizer.step()
             model.zero_grad()
         temp_time = time.time()

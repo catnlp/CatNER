@@ -51,6 +51,7 @@ best F1: 0.913147
 | charlstm+lstm+crf | 50_200 | 0.913147 |
 | average_batch_loss | 50_200 | 0.897811 |
 | cnnlstm+lstm+crf | 50_200 | 0.912601 |
+| clip+charlstm+lstm+crf | 50.0_50_200 | 0.912119 |
 
 
 

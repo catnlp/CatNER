@@ -30,7 +30,7 @@ class Data:
         # self.char_alphabet.add(PADDING)
         self.label_alphabet = Alphabet('label',True)
         self.tagScheme = "NoSeg"
-        self.char_features = "CNN" ## "LSTM"/"CNN"
+        self.char_features = "LSTM" ## "LSTM"/"CNN"
 
         self.train_texts = []
         self.dev_texts = []
@@ -63,7 +63,7 @@ class Data:
         self.HP_gpu = False
         self.HP_lr = 0.015
         self.HP_lr_decay = 0.05
-        self.HP_clip = None
+        self.HP_clip = True  ## catner
         self.HP_momentum = 0  ##catner
 
         
