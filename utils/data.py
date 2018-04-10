@@ -52,7 +52,7 @@ class Data:
         self.label_alphabet_size = 0
         ### hyperparameters
         self.HP_iteration = 100
-        self.HP_batch_size = 10
+        self.HP_batch_size = 10  ## catner
         self.HP_average_batch_loss = False ## catner
         self.HP_char_hidden_dim = 50
         self.HP_hidden_dim = 200
@@ -63,7 +63,7 @@ class Data:
         self.HP_gpu = False
         self.HP_lr = 0.015
         self.HP_lr_decay = 0.05
-        self.HP_clip = True  ## catner
+        self.HP_clip = False  ## catner
         self.HP_momentum = 0  ##catner
 
         
