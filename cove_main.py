@@ -286,6 +286,8 @@ def train(data, save_model_dir, seg=True):
                          win='cove_loss', opts={'title': 'cove_loss', 'legend': ['loss']})
                 sample_loss = 0
             loss.backward()
+            if data.HP_clip:
+                torch.nn.utils.clip_grad_norm(model.parameters(), 50.0)
             optimizer.step()
             model.zero_grad()
         temp_time = time.time()
@@ -332,10 +334,10 @@ def train(data, save_model_dir, seg=True):
             print("Test: time: %.2fs, speed: %.2fst/s; acc: %.4f" % (test_cost, speed, acc))
         if current_score > best_test:
             if seg:
-                print "Exceed previous best f score:", best_test
+                print("Exceed previous best f score:", best_test)
             else:
-                print "Exceed previous best acc score:", best_test
-            model_name = save_model_dir + '/model' + str(idx)
+                print ("Exceed previous best acc score:", best_test)
+            model_name = save_model_dir +'/model'+ str(idx)
             torch.save(model.state_dict(), model_name)
             best_test = current_score
             with open(save_model_dir + '/eval' + str(idx) + ".txt", 'wb') as f:
@@ -344,8 +346,13 @@ def train(data, save_model_dir, seg=True):
                 else:
                     f.write("acc: %.4f" % acc)
 
-        all_F.append([f_train * 100.0, f_dev * 100.0, f_test * 100.0])
-        Fwin = 'F-score of cove {train, dev, test}'
+        if seg:
+            print("Current best f score:", best_test)
+        else:
+            print("Current best acc score:", best_test)
+
+        all_F.append([f_train*100.0, f_dev*100.0, f_test*100.0])
+        Fwin = 'F-score of {train, dev, test}'
         vis.line(np.array(all_F), win=Fwin,
                  X=np.array([i for i in range(len(all_F))]),
                  opts={'title': Fwin, 'legend': ['train', 'dev', 'test']})
@@ -388,9 +395,10 @@ if __name__ == '__main__':
     parser.add_argument('--train', default="../data/conll2003/train.bmes")
     parser.add_argument('--dev', default="../data/conll2003/dev.bmes")
     parser.add_argument('--test', default="../data/conll2003/test.bmes")
-    parser.add_argument('--seg', default="True")
-    parser.add_argument('--extendalphabet', default="True")
-    parser.add_argument('--raw')
+    parser.add_argument('--gpu', default='True')
+    parser.add_argument('--seg', default="True") 
+    parser.add_argument('--extendalphabet', default="True") 
+    parser.add_argument('--raw') 
     parser.add_argument('--loadmodel')
     parser.add_argument('--output')
     args = parser.parse_args()
@@ -409,13 +417,16 @@ if __name__ == '__main__':
     status = args.status.lower()
 
     save_model_dir = args.savemodel
-    gpu = torch.cuda.is_available()
+    if args.gpu == "False":
+        gpu = False
+    else:
+        gpu = torch.cuda.is_available()
     # gpu = False  ## catner
     # gpu = False
     ## disable cudnn to avoid memory leak
     # torch.backends.cudnn.enabled = True
-    print "Seed num:", seed_num
-    print "CuDNN:", torch.backends.cudnn.enabled ## catner
+    print "Seed num:",seed_num
+    # print "CuDNN:", torch.backends.cudnn.enabled
     # gpu = False
     print "GPU available:", gpu
     print "Status:", status

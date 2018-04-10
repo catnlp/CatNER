@@ -56,3 +56,34 @@ best F1: 0.913147
 
 
 
+#### 3.3 cove+charlstm+lstm+crf
+
+```
+     Char embedding size: 30
+     Norm   word     emb: False
+     Norm   char     emb: False
+     Train instance number: 14041
+     Dev   instance number: 3250
+     Test  instance number: 3453
+     Raw   instance number: 0
+     Hyper       iteration: 100
+     Hyper      batch size: 10
+     Hyper   average batch: False
+     Hyper              lr: 0.015
+     Hyper        lr_decay: 0.05
+     Hyper         HP_clip: None
+     Hyper        momentum: 0
+     Hyper      hidden_dim: 1000
+     Hyper         dropout: 0.5
+     Hyper      lstm_layer: 1
+     Hyper          bilstm: True
+     Hyper             GPU: True
+     Hyper        use_char: True
+             Char_features: LSTM
+```
+
+#### 3.4 训练100个epoch:
+
+| 模型 | 超参数 | F1 |
+| :-------------: |:-------------:| :-----:|
+

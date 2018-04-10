@@ -4,7 +4,9 @@ python cove_main.py --status train \
 		--train ../data/conll2003/train.bmes \
 		--dev ../data/conll2003/dev.bmes \
 		--test ../data/conll2003/test.bmes \
-		--savemodel ../data/conll2003/cove/saved_model \
+		--savemodel ../data/conll2003/cove/saved_model_charlstm_50_lstm_1000_crf \
+		--savedset ../data/conll2003/cove/saved_model_charlstm_50_lstm_1000_crf \
+		--gpu True
 
 
 # python main.py --status decode \
