@@ -66,7 +66,10 @@ class CoveBiLSTM(nn.Module):
         self.cove = nn.LSTM(300, 300, num_layers=2, bidirectional=True, batch_first=True)
         self.cove.load_state_dict(model_zoo.load_url(model_urls['wmt-lstm'], model_dir=model_cache))
 
-        self.lstm = nn.LSTM(self.embedding_dim + self.char_hidden_dim + 600, lstm_hidden, num_layers=self.lstm_layer,
+        # self.lstm = nn.LSTM(self.embedding_dim + self.char_hidden_dim + 600, lstm_hidden, num_layers=self.lstm_layer,
+                            # batch_first=True, bidirectional=self.bilstm_flag)
+        ## catner
+        self.lstm = nn.LSTM(self.char_hidden_dim + 600, lstm_hidden, num_layers=self.lstm_layer,
                             batch_first=True, bidirectional=self.bilstm_flag)
         # The linear layer that maps from hidden state space to tag space
         self.hidden2tag = nn.Linear(self.hidden_dim, data.label_alphabet_size)
@@ -110,8 +113,9 @@ class CoveBiLSTM(nn.Module):
         # outputs = outputs[0]
         outputs.contiguous()
         outputs = outputs.view(batch_size, sent_len, -1)
-        word_embs = torch.cat([word_embs, outputs], 2)
-
+        ## catner
+        # word_embs = torch.cat([word_embs, outputs], 2)
+        word_embs = outputs
 
         if self.use_char:
             ## calculate char lstm last hidden

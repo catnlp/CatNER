@@ -55,8 +55,8 @@ class Data:
         self.HP_batch_size = 10
         self.HP_average_batch_loss = False
         self.HP_char_hidden_dim = 50
-        self.HP_hidden_dim = 1000   ## catner
-        self.HP_dropout = 0.5
+        self.HP_hidden_dim = 650   ## catner
+        self.HP_dropout = 0.5  ## catner
         self.HP_lstm_layer = 1
         self.HP_bilstm = True
         self.HP_use_char = True
